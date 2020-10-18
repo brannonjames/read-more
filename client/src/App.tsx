@@ -5,16 +5,18 @@ import './App.css';
 
 function App() {
 
-  const [message, setMessage] = useState('');
+  const [downloadLink, setDownloadLink] = useState('');
   useEffect(() => {
-    axios.get(getUrl(SERVICE_ENDPOINT.TEST))
-      .then(({ data }) => setMessage(data))
+    axios.post(getUrl(SERVICE_ENDPOINT.EPUB), {}, { responseType: 'blob' })
+      .then(({ data }) => {
+        setDownloadLink(URL.createObjectURL(data));
+      }).catch(console.error);
   }, []);
 
   return (
     <div className="App">
       <header className="App-header">
-        {message}
+        { downloadLink && <a href={downloadLink}>Download</a>}
       </header>
     </div>
   );

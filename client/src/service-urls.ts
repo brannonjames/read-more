@@ -1,5 +1,6 @@
 export enum SERVICE_ENDPOINT {
-  TEST = '/helloWorld'
+  TEST = '/helloWorld',
+  EPUB = '/ePubGen'
 }
 //
 // TODO convert to env variables
