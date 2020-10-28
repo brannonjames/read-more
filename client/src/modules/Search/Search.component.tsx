@@ -19,7 +19,7 @@ const Search = (props: ISearchProps) => {
         .then(addPost)
         .catch(console.error);
     }
-  }, [input]);
+  }, [isValidUrl, jsonUrl, addPost, input]);
 
   return (
     <Container>
