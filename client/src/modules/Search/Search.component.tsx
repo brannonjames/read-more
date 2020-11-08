@@ -2,7 +2,7 @@ import { default as React, useEffect } from 'react';
 import styled from 'styled-components';
 import SearchInput from '../../components/SearchInput';
 import {FlexCenter} from "../../components/Styled/layout";
-import withObserver from "../hocs/withObserver";
+import withObserver from "../../hocs/withObserver";
 import SearchStore from "./Search.store";
 
 //
@@ -41,6 +41,7 @@ export interface ISearchProps {
 // STYLED COMPONENTS
 
 const Container = styled(FlexCenter)`
+  width: 100%;
   padding: 40px;
   flex-direction: column;
 `;
