@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+export const URL_PATTERN: string = 'https://www.reddit.com/r/';
+
 export const fetchRedditPost = async (url: string) : Promise<RedditPost> => {
   //
   try {

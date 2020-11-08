@@ -6,6 +6,8 @@ function App() {
   return (
     <div>
       <Search />
+      <p>background stuff</p>
+
     </div>
   );
 }

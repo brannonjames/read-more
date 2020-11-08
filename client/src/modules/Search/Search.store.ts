@@ -1,17 +1,16 @@
 import {makeAutoObservable} from "mobx";
-import {RedditPost} from "./Search.support";
+import * as SearchSupport from "./Search.support";
 
 
 export default class SearchStore {
 
   static sharedInstance: SearchStore = new SearchStore();
 
-  private URL_PATTERN: string = 'https://www.reddit.com/r/';
-
   //
   // OBSERVABLES
   input: string = '';
-  selectedPosts: RedditPost[] = [];
+  stagedPosts: SearchSupport.RedditPost[] = [];
+  selectedPosts: SearchSupport.RedditPost[] = [];
 
 
   constructor() {
@@ -22,19 +21,27 @@ export default class SearchStore {
   // ACTIONS
   //
   setInput = (value: string) => {
-    console.log('setting input...');
     this.input = value;
   };
 
-  addPost = (post: RedditPost) => {
+  addPost = (post: SearchSupport.RedditPost) => {
     this.selectedPosts = [...this.selectedPosts, post];
+    this.stagedPosts = [];
+    this.input = '';
+  };
+
+  search = async () => {
+    if (this.isValidUrl) {
+      const response = await SearchSupport.fetchRedditPost(this.jsonUrl);
+      this.stagedPosts = [response]
+    }
   };
 
   //
   // COMPUTEDS
   //
   get isValidUrl() {
-    return this.input.startsWith(this.URL_PATTERN);
+    return this.input.startsWith(SearchSupport.URL_PATTERN);
   }
 
   get jsonUrl() {
