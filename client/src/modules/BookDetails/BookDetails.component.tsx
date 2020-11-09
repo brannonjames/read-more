@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import BookDetailsStore from './BookDetails.store'
 import withObserver from "../../hocs/withObserver";
 import TextInput from '../../components/TextInput';
-import Checkbox from '../../components/Checkbox';
 
 
 const BookDetails = (props: IBookDetailsProps) => {
