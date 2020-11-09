@@ -10,7 +10,7 @@ const BookDetails = (props: IBookDetailsProps) => {
   const { store } = props;
   return (
     <Container>
-      <ContainerDescription>Edit your ebook details...</ContainerDescription>
+      <ContainerDescription>Edit your ebook details</ContainerDescription>
       <TitleInput
         onChange={e => store.setTitle(e.target.value)}
         value={store.title}

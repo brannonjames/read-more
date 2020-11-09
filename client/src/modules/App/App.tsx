@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Search from '../Search';
 import BookDetails from '../BookDetails';
+import Chapters from '../Chapters';
 
 function App() {
 
@@ -13,7 +14,9 @@ function App() {
           <LeftSection>
             <BookDetails />
           </LeftSection>
-          <RightSection />
+          <RightSection>
+            <Chapters />
+          </RightSection>
         </InnerSectionContainer>
       </OuterSectionContainer>
     </Container>
