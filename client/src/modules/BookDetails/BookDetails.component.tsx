@@ -21,11 +21,6 @@ const BookDetails = (props: IBookDetailsProps) => {
         value={store.author}
         label="Author"
       />
-      <Checkbox
-        label="Include Table of Contents"
-        checked={store.shouldIncludeTOC}
-        onChange={e => store.setShouldIncludeTOC(e.target.checked)}
-      />
     </Container>
   )
 
@@ -49,6 +44,7 @@ const Container = styled.div`
 const ContainerDescription = styled.p`
   font-style: italic;
   margin-bottom: 24px;
+  color: #666;
 `;
 
 const DetailInput = styled(TextInput)`

@@ -51,7 +51,7 @@ const SeachInputContainer = styled.div`
 
 const StyledInput = styled(TextInput)`
   display: flex;
-  width: calc(100% - 24px);
+  width: 100%;
   font-size: 24px;
   padding: 12px;
 `;
@@ -62,15 +62,23 @@ const SearchResults = styled.ul`
   top: 100%;
   left: 0;
   right: 0;
-  background-color: blue;
-  color: white;
+  border-radius: 4px;
   margin: 0;
   padding: 0;
+  background-color: white;
+  border-left: 2px solid ${({ theme }) => theme.palette.secondary.main};
+  border-right: 2px solid ${({ theme }) => theme.palette.secondary.main};
+  border-bottom: 2px solid ${({ theme }) => theme.palette.secondary.main};
 `;
 
 const SearchResult = styled.li`
+  padding: 12px;
+  font-weight: bold;
+   &:not(:last-of-type) {
+    border-bottom: 1px solid lightslategray;
+   }
   &:hover {
     cursor: pointer;
-    background-color: aquamarine;
+    background-color: ${({ theme }) => theme.palette.secondary.main};
   }
 `;

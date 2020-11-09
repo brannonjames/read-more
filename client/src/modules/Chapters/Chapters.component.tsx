@@ -59,4 +59,5 @@ const Container = styled.div`
 const ContainerDescription = styled.p`
   font-style: italic;
   margin-bottom: 24px;
+  color: #666;
 `;

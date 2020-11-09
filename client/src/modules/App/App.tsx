@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Search from '../Search';
 import BookDetails from '../BookDetails';
 import Chapters from '../Chapters';
+import Download from '../Download';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <RightSection>
             <Chapters />
           </RightSection>
+          <Download />
         </InnerSectionContainer>
       </OuterSectionContainer>
     </Container>
@@ -29,7 +31,13 @@ const Container = styled.main`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  
+  &,
+  input,
+  label,
+  button,
+  a {
+    font-family: 'Noto Sans', sans-serif;
+  }
 `;
 
 const OuterSectionContainer = styled.div`
@@ -40,20 +48,20 @@ const OuterSectionContainer = styled.div`
 
 const InnerSectionContainer = styled.div`
   display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
   width: 100%;
   max-width: 1200px;
+  position: relative;
 `;
 
 const Section = styled.section`
   width: 50%;
+  min-width: 600px;
   display: flex;
   flex-direction: column;
 `;
 
-const LeftSection = styled(Section)`
-  background-color: plum;
-`;
+const LeftSection = styled(Section)``;
 
-const RightSection = styled(Section)`
-  background-color: coral;
-`;
+const RightSection = styled(Section)``;

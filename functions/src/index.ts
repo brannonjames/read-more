@@ -27,13 +27,10 @@ export const ePubGen = functions.https.onRequest((req, res) => {
 
 
     const options = {
-      title: 'Test Book',
-      author: 'Jimmy',
-      content: [{ title: 'Chapter 1', data: '<h1>Hello World</h1>' }],
+      ...req.body,
       verbose: true,
       tempDir: ''
     };
-
 
     const workingDir = path.join(os.tmpdir(), uuid.v4());
     fs.mkdirSync(workingDir);

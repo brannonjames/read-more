@@ -6,6 +6,10 @@ export default (props: TextFieldProps) => {
     // https://github.com/mui-org/material-ui/issues/15697
     // @ts-ignore
     <TextField
+      InputProps={{
+        color: 'secondary'
+      }}
+      color="secondary"
       variant="outlined"
       {...props}
     />
