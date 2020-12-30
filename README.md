@@ -35,7 +35,10 @@ I'm going to try to keep the Issues section as up to date as possible with bugs/
 
 Any ideas? Create an Issue for discussion :)
 
-If you feel like working on something, leave a comment on the Issue so others know it's being worked on.
+If you feel like working on something leave a comment on the Issue so others know it's being worked on.
+
+When you submit a PR for the `client` directory, head on over to the [Live Preview Action](https://github.com/brannonjames/readdit/actions?query=workflow%3A%22Deploy+to+Preview+Channel%22)
+Navigate to your commit then "Deploy Preview". You should see a link to a live preview of your branch.
 
 Any questions just ask!
     
