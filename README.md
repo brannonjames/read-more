@@ -12,7 +12,7 @@ to an `.epub` format. Pretty simple.
 Readdit currently uses a React/MobX frontend located in the `client` directory. The "backend" uses Firebase functions.
 
 Currenty the only API endpoint uses the [epub-gen](https://www.npmjs.com/package/epub-gen) to do the actual conversion.
-I'm working on reverse-engineered version of this library that will run in the browser, so a future iteration might see
+I'm working on reverse-engineered version of this library that will run in the browser ([here](https://github.com/brannonjames/epub-browser)), so a future iteration might see
 the removal of there functions altogether.
 
 ### Getting up and running
