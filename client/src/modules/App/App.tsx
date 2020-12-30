@@ -13,10 +13,10 @@ function App() {
       <OuterSectionContainer>
         <InnerSectionContainer>
           <LeftSection>
-            <BookDetails />
+            <Chapters />
           </LeftSection>
           <RightSection>
-            <Chapters />
+            <BookDetails />
           </RightSection>
           <Download />
         </InnerSectionContainer>

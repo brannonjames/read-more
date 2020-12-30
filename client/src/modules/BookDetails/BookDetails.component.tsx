@@ -52,10 +52,4 @@ const DetailInput = styled(TextInput)`
   }  
 `;
 
-const TitleInput = styled(DetailInput)`
-  && {
-    .MuiInputBase-root {
-      font-size: 2rem;
-    }    
-  }
-`;
+const TitleInput = styled(DetailInput)``;

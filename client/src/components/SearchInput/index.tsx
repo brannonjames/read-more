@@ -52,8 +52,12 @@ const SeachInputContainer = styled.div`
 const StyledInput = styled(TextInput)`
   display: flex;
   width: 100%;
-  font-size: 24px;
   padding: 12px;
+  && {
+    .MuiInputBase-root {
+      font-size: 2rem;
+    }    
+  }
 `;
 
 const SearchResults = styled.ul`
