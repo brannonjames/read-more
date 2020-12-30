@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently --kill-others \"npm run client-dev\" \"npm run api-dev\"",
     "client-dev": "npm start --prefix client",
-    "api-dev": "npm run serve --prefix api/functions",
+    "api-dev": "npm run serve --prefix functions",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "cd functions && npm install && cd .. && cd client && npm install"
   },
