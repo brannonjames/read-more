@@ -48,6 +48,7 @@ const OuterSectionContainer = styled.div`
 
 const InnerSectionContainer = styled.div`
   display: flex;
+  justify-content: center;
   align-content: flex-start;
   flex-wrap: wrap;
   width: 100%;
