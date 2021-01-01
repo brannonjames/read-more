@@ -23,11 +23,22 @@ You can check out the live version [here.](https://readdit.net/)
 
 2. `cd readdit`
 
-3. `npm run dev`  
-This command does two main things, firstly it runs the webpack development server that comes built into create-react-app.
-Secondly it runs a local Firebase function emulator so we can test these functions locally. 
+3. `npm install`
 
-4. That's basically it. `client` and `function` directories have their own `package.json` files to do more specific things.
+4. `npm run api-dev` to serve the Functions emulator locally.
+
+5. `npm run client-dev` runs the webpack development server that comes built into create-react-app.
+
+6. That's basically it. `client` and `function` directories have their own `package.json` files to do more specific things.
+
+---
+**NOTE**
+
+To run the Functions API emulator, you'll need the [Firebase CLI](https://firebase.google.com/docs/cli) installed globally.  
+
+Install with `npm install -g firebase-tools`
+
+---
 
 ### How to contribute
 
