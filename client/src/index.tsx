@@ -3,13 +3,26 @@ import ReactDOM from 'react-dom';
 import App from './modules/App/App';
 import * as serviceWorker from './serviceWorker';
 import { ThemeProvider } from '@material-ui/core/styles';
-import { ThemeProvider as StyledThemeProvider } from "styled-components";
+import { ThemeProvider as StyledThemeProvider, createGlobalStyle } from "styled-components";
 import theme from './theme';
+
+const GlobalStyles = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+  };
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  };
+`;
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <StyledThemeProvider theme={theme}>
+        <GlobalStyles />
         <App />
       </StyledThemeProvider>
     </ThemeProvider>
