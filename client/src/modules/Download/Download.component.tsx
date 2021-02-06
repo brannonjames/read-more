@@ -1,43 +1,36 @@
 import React from 'react';
+import { observer } from 'mobx-react-lite';
 import Fab from '../../components/Fab';
 import ChaptersStore from '../../modules/Chapters/Chapters.store';
 import DetailsStore from '../../modules/BookDetails/BookDetails.store';
 import * as DownloadSupport from './Download.support';
 import DownloadStore from './Download.store';
-import withObserver from "../../hocs/withObserver";
 
-// We only need to access the store on click so this component doesn't
-// have to observe the store
 const { sharedInstance: chaptersStore } = ChaptersStore;
 const { sharedInstance: detailsStore } = DetailsStore;
+const { sharedInstance: downloadtsore } = DownloadStore;
 
-const Download = (props: IDownloadProps) => {
-  const { store } = props;
+const Download = observer(() => {
 
   const handleDownload = async () => {
-    store.setIsLoading(true);
+    downloadtsore.setIsLoading(true);
     await DownloadSupport.downloadEbookFromRedditSources(
       detailsStore.title,
       detailsStore.author,
       'https://www.redditstatic.com/icon.png',
       chaptersStore.chapters
     );
-    store.setIsLoading(false);
+    downloadtsore.setIsLoading(false);
   };
   //
   return (
     <Fab
       onClick={handleDownload}
-      disabled={store.isLoading}
+      disabled={downloadtsore.isLoading}
     >
-      { store.isLoading ? 'Generating...' : 'Download eBook' }
+      { downloadtsore.isLoading ? 'Generating...' : 'Download eBook' }
     </Fab>
   )
-};
+});
 
-export default withObserver(Download, DownloadStore.sharedInstance);
-
-// TYPES
-export interface IDownloadProps {
-  store: DownloadStore
-}
+export default Download;

@@ -1,15 +1,16 @@
 import { default as React, useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
 import styled from 'styled-components';
 import SearchInput from '../../components/SearchInput';
 import {FlexCenter} from "../../components/Styled/layout";
-import withObserver from "../../hocs/withObserver";
 import SearchStore from "./Search.store";
+
+const { sharedInstance: store } = SearchStore;
 
 //
 // MAIN COMPONENT
 //
-const Search = (props: ISearchProps) => {
-  const { store } = props;
+const Search = observer(() => {
 
   useEffect(() => {
     store.search();
@@ -29,14 +30,9 @@ const Search = (props: ISearchProps) => {
       />
     </Container>
   )
-};
+});
 
-export default withObserver(Search, SearchStore.sharedInstance);
-
-// TYPES
-export interface ISearchProps {
-  store: SearchStore
-}
+export default Search;
 
 // STYLED COMPONENTS
 

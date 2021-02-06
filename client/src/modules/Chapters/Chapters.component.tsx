@@ -1,6 +1,6 @@
 import { default as React } from 'react';
+import { observer } from 'mobx-react-lite';
 import styled from 'styled-components';
-import withObserver from "../../hocs/withObserver";
 import ChaptersStore from "./Chapters.store";
 import List from '../../components/List';
 import ListItem from '../../components/ListItem';
@@ -12,8 +12,9 @@ import CloseIcon from '@material-ui/icons/Close';
 //
 // MAIN COMPONENT
 //
-const Chapters = (props: IChaptersProps) => {
- const { store } = props;
+const Chapters = observer(() => {
+
+ const store = ChaptersStore.sharedInstance;
 
   return (
     <Container>
@@ -39,14 +40,10 @@ const Chapters = (props: IChaptersProps) => {
       </List>
     </Container>
   )
-};
+});
 
-export default withObserver(Chapters, ChaptersStore.sharedInstance);
+export default Chapters;
 
-// TYPES
-export interface IChaptersProps {
-  store: ChaptersStore
-}
 
 // STYLED COMPONENTS
 const Container = styled.div`

@@ -1,12 +1,13 @@
 import React from 'react';
+import { observer } from 'mobx-react-lite';
 import styled from 'styled-components';
 import BookDetailsStore from './BookDetails.store'
-import withObserver from "../../hocs/withObserver";
 import TextInput from '../../components/TextInput';
 
+const { sharedInstance: store } = BookDetailsStore;
 
-const BookDetails = (props: IBookDetailsProps) => {
-  const { store } = props;
+
+const BookDetails = observer(() => {
   return (
     <Container>
       <ContainerDescription>Edit your ebook details</ContainerDescription>
@@ -23,14 +24,9 @@ const BookDetails = (props: IBookDetailsProps) => {
     </Container>
   )
 
-};
+});
 
-export default withObserver(BookDetails, BookDetailsStore.sharedInstance);
-
-// TYPES
-export interface IBookDetailsProps {
-  store: BookDetailsStore
-}
+export default BookDetails;
 
 // STYLED COMPONENTS
 const Container = styled.div`
