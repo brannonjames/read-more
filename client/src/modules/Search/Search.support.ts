@@ -1,5 +1,14 @@
 import axios from 'axios';
-import {RedditPost, RedditResponseData, RedditResponseDataList, RedditSubreddit} from "./Search.types";
+import {
+  RedditPost,
+  RedditResponseData,
+  RedditResponseDataList,
+  RedditSubreddit,
+  SearchParams,
+  SortParam, SubredditRequestOptions,
+  TimeParam,
+  TypeParam
+} from "./Search.types";
 
 export const REDDIT_URL: string = 'https://www.reddit.com';
 export const URL_PATTERN: string = `${REDDIT_URL}/r/`;
@@ -39,15 +48,34 @@ export const searchSubreddits = async (query: string) : Promise<RedditSubreddit[
 
     const url = getJsonUrl(SEARCH_PATTERN);
 
-    const params = {
+    const params: SearchParams = {
       q: query,
-      type: 'sr',
-      sort: 'relevance',
-      t: 'month',
-      limit: '6'
+      type: TypeParam.SR,
+      sort: SortParam.RELEVANCE,
+      t: TimeParam.MONTH,
+      limit: 6
     };
 
     const response = await axios.get<RedditResponseData<RedditSubreddit>>(url, { params });
+
+    return response.data?.data?.children.map(child => child.data);
+
+  } catch (err) {
+    console.error(err);
+    return Promise.reject(err);
+  }
+};
+
+/**
+ * Search a particular subreddit for posts
+ */
+export const searchSubredditForPosts = async (options: SubredditRequestOptions) : Promise<RedditPost[]> => {
+  try {
+
+    const subredditUrl = URL_PATTERN.concat(options.name);
+    const url = getJsonUrl(subredditUrl);
+
+    const response = await axios.get<RedditResponseData<RedditPost>>(url, { params: options.searchParams });
 
     return response.data?.data?.children.map(child => child.data);
 

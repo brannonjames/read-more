@@ -50,3 +50,39 @@ export interface RedditResponseData<R> {
     }[]
   }
 }
+
+export enum TimeParam {
+  HOUR = 'hour',
+  DAY = 'day',
+  WEEK = 'week',
+  MONTH = 'month',
+  YEAR = 'year',
+  ALL = 'all'
+}
+
+export enum SortParam {
+  RELEVANCE = 'relevance',
+  HOT = 'hot',
+  TOP = 'new',
+  COMMENTS = 'comments'
+}
+
+export enum TypeParam {
+  LINK = 'link',
+  USER = 'user',
+  SR = 'sr'
+}
+
+export interface SearchParams {
+  t?: TimeParam
+  sort?: SortParam
+  q?: string
+  type?: TypeParam
+  limit?: number
+  count?: number
+}
+
+export interface SubredditRequestOptions {
+  name: string
+  searchParams: SearchParams
+}
