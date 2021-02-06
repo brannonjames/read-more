@@ -1,12 +1,18 @@
 import axios from 'axios';
+import {RedditPost, RedditResponseData, RedditResponseDataList, RedditSubreddit} from "./Search.types";
 
-export const URL_PATTERN: string = 'https://www.reddit.com/r/';
+export const REDDIT_URL: string = 'https://www.reddit.com';
+export const URL_PATTERN: string = `${REDDIT_URL}/r/`;
+export const SEARCH_PATTERN: string = `${REDDIT_URL}/search/`;
+
+export const getJsonUrl = (url: string) => url.concat('.json');
+
 
 export const fetchRedditPost = async (url: string) : Promise<RedditPost> => {
   //
   try {
     //
-    const response = await axios.get<RedditPostResponse>(url);
+    const response = await axios.get<RedditResponseDataList<RedditPost>>(url);
     console.log(response);
     //
     const post: RedditPost = response.data[0]?.data?.children[0]?.data;
@@ -25,27 +31,29 @@ export const fetchRedditPost = async (url: string) : Promise<RedditPost> => {
   }
 };
 
-export interface RedditPost {
-  author: string
-  created: number
-  created_utc: number
-  id: string
-  over_18: boolean,
-  permalink: string,
-  score: number,
-  selftext: string,
-  selftext_html: string
-  title: string
-  url: string
-  ups: number,
-  upvote_ratio: number
-}
+/**
+ * Uses search query 'q' to search for the top most relevant subreddits
+ */
+export const searchSubreddits = async (query: string) : Promise<RedditSubreddit[]> => {
+  try {
 
-export interface RedditPostResponse {
-  data: {
-    children: {
-      data: RedditPost
-    }[]
-  }[]
-}
+    const url = getJsonUrl(SEARCH_PATTERN);
+
+    const params = {
+      q: query,
+      type: 'sr',
+      sort: 'relevance',
+      t: 'month',
+      limit: '6'
+    };
+
+    const response = await axios.get<RedditResponseData<RedditSubreddit>>(url, { params });
+
+    return response.data?.data?.children.map(child => child.data);
+
+  } catch (err) {
+    console.error(err);
+    return Promise.reject(err);
+  }
+};
 

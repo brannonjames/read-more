@@ -1,7 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import * as SearchSupport from "./Search.support";
 import ChaptersStore from '../Chapters/Chapters.store';
-import {RedditPost} from "./Search.support";
+import {RedditPost} from "./Search.types";
 
 
 export default class SearchStore {
@@ -12,7 +12,7 @@ export default class SearchStore {
   //
   // OBSERVABLES
   input: string = '';
-  stagedPosts: SearchSupport.RedditPost[] = [];
+  stagedPosts: RedditPost[] = [];
 
 
   constructor() {
@@ -30,7 +30,7 @@ export default class SearchStore {
     this.stagedPosts = posts;
   };
 
-  addPost = (post: SearchSupport.RedditPost) => {
+  addPost = (post: RedditPost) => {
     this.setStagedPosts([]);
     this.setInput('');
     this.chaptersStore.addChapter(post);

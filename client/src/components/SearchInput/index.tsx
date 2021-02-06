@@ -45,7 +45,7 @@ export default SearchInput;
 const SeachInputContainer = styled.div`
   display: flex;
   width: 98%;
-  max-width: 800px;
+  max-width: 1222px;
   position: relative;
 `;
 
