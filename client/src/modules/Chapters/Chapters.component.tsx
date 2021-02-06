@@ -25,7 +25,7 @@ const Chapters = (props: IChaptersProps) => {
               <ListItem key={chapter.id} divider>
                 <ListItemText
                   primary={chapter.title}
-                  secondary={`Chatper ${index + 1}`}
+                  secondary={`Chapter ${index + 1}`}
                 />
                 <ListItemSecondaryAction>
                   <IconButton onClick={() => store.removeChapter(chapter.id)}>
