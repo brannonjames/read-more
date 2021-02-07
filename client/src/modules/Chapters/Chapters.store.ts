@@ -1,5 +1,5 @@
 import {makeAutoObservable} from "mobx";
-import {RedditPost} from "../Search/Search.support";
+import {RedditPost} from "../Search/Search.types";
 
 export default class ChaptersStore {
 

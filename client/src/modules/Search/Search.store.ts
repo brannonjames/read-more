@@ -1,7 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import * as SearchSupport from "./Search.support";
 import ChaptersStore from '../Chapters/Chapters.store';
-import {RedditPost} from "./Search.types";
+import {RedditPost, RedditSubreddit, SearchParams, SortParam} from "./Search.types";
 
 
 export default class SearchStore {
@@ -13,6 +13,13 @@ export default class SearchStore {
   // OBSERVABLES
   input: string = '';
   stagedPosts: RedditPost[] = [];
+  subreddits: RedditSubreddit[] = [];
+  isSearchFocued: boolean = false;
+  selectedSub: string = '';
+  searchParams: SearchParams = {
+    sort: SortParam.HOT,
+    limit: 5
+  };
 
 
   constructor() {
@@ -30,9 +37,24 @@ export default class SearchStore {
     this.stagedPosts = posts;
   };
 
+  setStagedSubredddits = (subs: RedditSubreddit[]) => {
+    this.subreddits = subs;
+  };
+
+  setIsSearchFocued = (isFocued: boolean) => {
+    this.isSearchFocued = isFocued;
+  };
+
+  setSelectededSubreddit = (sub: string) => {
+    this.selectedSub = sub;
+  };
+
   addPost = (post: RedditPost) => {
-    this.setStagedPosts([]);
+    // TODO Add better experience for adding multiple chapters quickly
     this.setInput('');
+    this.setSelectededSubreddit('');
+    this.setStagedPosts([]);
+    this.setStagedSubredddits([]);
     this.chaptersStore.addChapter(post);
   };
 
@@ -40,6 +62,13 @@ export default class SearchStore {
     if (this.isValidUrl) {
       const response = await SearchSupport.fetchRedditPost(this.jsonUrl);
       this.setStagedPosts([response]);
+    } else if (this.selectedSub) {
+      const options = { name: this.selectedSub, searchParams: this.searchParams };
+      const response = await SearchSupport.searchSubredditForPosts(options);
+      this.setStagedPosts(response);
+    } else {
+      const response = await SearchSupport.searchSubreddits(this.input);
+      this.setStagedSubredddits(response);
     }
   };
 
@@ -52,5 +81,12 @@ export default class SearchStore {
 
   get jsonUrl() {
     return this.input.endsWith('.json') ? this.input : this.input.concat('.json');
+  }
+
+  get isOpen() : boolean {
+    if (this.input === '') {
+      return false;
+    }
+    return this.isSearchFocued && (this.stagedPosts.length !== 0 || this.subreddits.length !== 0);
   }
 }

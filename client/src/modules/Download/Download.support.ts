@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {RedditPost} from "../Search/Search.support";
+import {RedditPost} from "../Search/Search.types";
 import getServiceUrl, {SERVICE_ENDPOINT} from '../../service-urls';
 
 

@@ -33,6 +33,7 @@ export interface RedditSubreddit {
   subscribers: number
   public_description: string
   url: string
+  id: string
 }
 
 export interface RedditResponseDataList<R> {

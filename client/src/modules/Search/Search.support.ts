@@ -58,7 +58,7 @@ export const searchSubreddits = async (query: string) : Promise<RedditSubreddit[
 
     const response = await axios.get<RedditResponseData<RedditSubreddit>>(url, { params });
 
-    return response.data?.data?.children.map(child => child.data);
+    return response.data?.data?.children.map(child => child.data) || [];
 
   } catch (err) {
     console.error(err);
@@ -72,7 +72,7 @@ export const searchSubreddits = async (query: string) : Promise<RedditSubreddit[
 export const searchSubredditForPosts = async (options: SubredditRequestOptions) : Promise<RedditPost[]> => {
   try {
 
-    const subredditUrl = URL_PATTERN.concat(options.name);
+    const subredditUrl = REDDIT_URL.concat(options.name);
     const url = getJsonUrl(subredditUrl);
 
     const response = await axios.get<RedditResponseData<RedditPost>>(url, { params: options.searchParams });

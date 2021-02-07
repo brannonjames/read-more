@@ -4,11 +4,19 @@ import TextInput from '../TextInput'
 import {SearchInputProps} from "./SearchInput.types";
 
 const SearchInput = (props: SearchInputProps) => {
-  const { searchValue, onSearchFieldChange, posts, onAdd } = props;
+  const {
+    searchValue,
+    onSearchFieldChange,
+    posts,
+    onAdd,
+    subreddits,
+    onSubSelect,
+    isOpen,
+    onFocus,
+  } = props;
   //
-  const isSinglePost = posts.length === 1;
-  const noPosts = posts.length === 0;
-  //
+  const showPosts = posts.length > 0;
+  const showSubreddits = subreddits.length > 0 && !showPosts;
   const handleAdd = (post) => {
     onAdd(post)
   };
@@ -19,19 +27,32 @@ const SearchInput = (props: SearchInputProps) => {
         placeholder="Paste Reddit post URL"
         value={searchValue}
         onChange={onSearchFieldChange}
+        onFocus={onFocus}
       />
       {
-        !noPosts && (
+        (isOpen) && (
           <SearchResults>
             {
-              isSinglePost && (
+              showSubreddits && subreddits.map(sub => (
                 <SearchResult
-                  onClick={() => handleAdd(posts[0])}
+                  key={sub.id}
+                  onClick={() => onSubSelect(sub)}
                   tabIndex="-1"
                 >
-                  {`Add "${posts[0].title}" to your list`}
+                  {sub.display_name_prefixed}
                 </SearchResult>
-              )
+              ))
+            }
+            {
+              showPosts && posts.map(post => (
+                <SearchResult
+                  key={post.id}
+                  onClick={() => handleAdd(post)}
+                  tabIndex="-1"
+                >
+                  {`Add "${post.title}" to your list`}
+                </SearchResult>
+              ))
             }
           </SearchResults>
         )
@@ -70,6 +91,7 @@ const SearchResults = styled.ul`
   margin: 0;
   padding: 0;
   background-color: white;
+  z-index: 999;
   border-left: 2px solid ${({ theme }) => theme.palette.secondary.main};
   border-right: 2px solid ${({ theme }) => theme.palette.secondary.main};
   border-bottom: 2px solid ${({ theme }) => theme.palette.secondary.main};
