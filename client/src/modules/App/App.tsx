@@ -58,9 +58,12 @@ const InnerSectionContainer = styled.div`
 
 const Section = styled.section`
   width: 50%;
-  min-width: 600px;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const LeftSection = styled(Section)``;
