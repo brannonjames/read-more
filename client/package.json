@@ -42,12 +42,10 @@
   "devDependencies": {
     "@types/react": "^16.9.53"
   },
-
   "eslintConfig": {
     "extends": "react-app",
     "rules": {
       "import/no-anonymous-default-export": 0
     }
   }
-
 }
