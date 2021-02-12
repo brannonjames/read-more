@@ -7,7 +7,7 @@ export default class ChaptersStore {
 
   //
   // OBSERVABLES
-  chapters: RedditPost[] = []
+  chapters: RedditPost[] = [];
 
 
   constructor() {
@@ -18,6 +18,7 @@ export default class ChaptersStore {
   // ACTIONS
   //
   addChapter = (chapter: RedditPost) => this.chapters = [...this.chapters, chapter];
+  addChapters = (chapters: RedditPost[]) => this.chapters = [...this.chapters, ...chapters];
   removeChapter = (id: string) => this.chapters = this.chapters.filter(chapter => chapter.id !== id);
 
 }

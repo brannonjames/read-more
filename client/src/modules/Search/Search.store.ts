@@ -13,6 +13,7 @@ export default class SearchStore {
   // OBSERVABLES
   input: string = '';
   stagedPosts: RedditPost[] = [];
+  selectedPostIds: Set<string> = new Set();
   subreddits: RedditSubreddit[] = [];
   isSearchFocued: boolean = false;
   selectedSub: string = '';
@@ -37,6 +38,18 @@ export default class SearchStore {
     this.stagedPosts = posts;
   };
 
+  addSelectedPostId = (postId: string) => {
+    this.selectedPostIds.add(postId);
+  };
+
+  removeSelectedPostId = (postId: string) => {
+    this.selectedPostIds.delete(postId);
+  };
+
+  removeSelectedPostIds = () => {
+    this.selectedPostIds.clear();
+  };
+
   setStagedSubredddits = (subs: RedditSubreddit[]) => {
     this.subreddits = subs;
   };
@@ -47,6 +60,14 @@ export default class SearchStore {
 
   setSelectededSubreddit = (sub: string) => {
     this.selectedSub = sub;
+  };
+
+  clear = () => {
+    this.setInput('');
+    this.setSelectededSubreddit('');
+    this.removeSelectedPostIds();
+    this.setStagedPosts([]);
+    this.setStagedSubredddits([]);
   };
 
   addPost = (post: RedditPost) => {
@@ -84,9 +105,20 @@ export default class SearchStore {
   }
 
   get isOpen() : boolean {
-    if (this.input === '') {
-      return false;
-    }
-    return this.isSearchFocued && (this.stagedPosts.length !== 0 || this.subreddits.length !== 0);
+    return this.input.length !== 0;
+  }
+
+  get shouldShowSearchResults() : boolean {
+    return this.stagedPosts.length > 0 && Boolean(this.selectedSub);
+  }
+
+  get selectedPosts() : RedditPost[] {
+    return Array.from(this.selectedPostIds).map(id => {
+      const stagedPost = this.stagedPosts.find(post => post.id === id);
+      if (!stagedPost) {
+        throw new TypeError('Something went wrong here');
+      }
+      return stagedPost;
+    });
   }
 }

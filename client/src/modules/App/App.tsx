@@ -4,6 +4,7 @@ import Search from '../Search';
 import BookDetails from '../BookDetails';
 import Chapters from '../Chapters';
 import Download from '../Download';
+import SearchResults from "../../components/SearchResults/SearchResults.component";
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
     <Container>
       <Search />
       <OuterSectionContainer>
+        <SearchResults />
         <InnerSectionContainer>
           <LeftSection>
             <Chapters />
@@ -44,6 +46,7 @@ const OuterSectionContainer = styled.div`
   flex-grow: 1;
   display: flex;
   justify-content: center;
+  position: relative;
 `;
 
 const InnerSectionContainer = styled.div`

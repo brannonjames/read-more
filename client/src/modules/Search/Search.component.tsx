@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import SearchInput from '../../components/SearchInput';
 import {FlexCenter} from "../../components/Styled/layout";
 import SearchStore from "./Search.store";
-import {RedditSubreddit} from "./Search.types";
+import PostControlCenter from '../../components/PostControlCenter/PostControlCenter.component';
 
 const { sharedInstance: store } = SearchStore;
 
@@ -14,32 +14,25 @@ const { sharedInstance: store } = SearchStore;
 const Search = observer(() => {
 
   useEffect(() => {
-    store.search();
+    if (store.input !== '') {
+      store.search();
+    }
   }, [store.input, store.selectedSub]);
 
   useEffect(() => {
     store.setSelectededSubreddit('');
     store.setStagedSubredddits([]);
+    if (store.input === '') {
+      store.setStagedPosts([]);
+    }
   }, [store.input]);
 
-  const handleAdd = post => {
-    store.addPost(post);
-  };
-
-  const handleSubSelected = (sub: RedditSubreddit) => {
-    store.setSelectededSubreddit(sub.url)
-  };
-
   return (
-    <Container>
+    <Container style={{ backgroundColor: store.isOpen ? '#FAFAFA' : 'initial' }}>
       <SearchInput
-        onSearchFieldChange={e => store.setInput(e.target.value)}
-        posts={store.stagedPosts}
-        subreddits={store.subreddits}
+        isDisabled={Boolean(store.selectedSub)}
+        onSearchFieldChange={store.setInput}
         searchValue={store.input}
-        onAdd={handleAdd}
-        onSubSelect={handleSubSelected}
-        isOpen={store.isOpen}
         onFocus={() => store.setIsSearchFocued(true)}
       />
     </Container>
